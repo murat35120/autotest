@@ -1,0 +1,40 @@
+.screen {
+    width:100%;
+	height:100%;
+    overflow:auto;
+}
+
+/*5 */
+div, input, select, textarea{
+    font-size:  20px;    
+    font-family:  Sans-serif;  
+}
+
+.header{
+    font-size:  var(--mark_font_size, 3em);
+	font-family:  var(--mark_font_family, Sans-serif); 
+	color: var(--mark_font_color, #000000);
+	display:var(--mark_show, 'flex');
+	margin: 10px;
+	text-align: center;
+}  
+.slogan{
+	font-size:  var(--slogan_font_size, 1em);
+    font-family: var(--slogan_font_family, Cursive); 
+	color: var(--slogan_font_color, #000000);
+	margin: 10px;
+	display:var(--slogan_show, 'flex');	
+	text-align: center;
+}
+
+div[data-id="infoArea"] div{
+    margin: 1px 5px ;
+    padding: 1px 5px ;
+}
+
+
+select{
+    background-color:rgba(255, 255, 255, 0);
+	border-color:rgba(255, 255, 255, 0);
+	border-radius: 5px;
+}

@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "mqtt": "^5.10.1",
+    "mysql2": "^2.3.3",
+    "uid-safe": "^2.1.5"
+  }
+}

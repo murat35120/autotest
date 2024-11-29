@@ -1,0 +1,122 @@
+div, input, select{  /* значения по умолчанию */
+    display: flex;  /* включили гибкое форматирование */
+}
+ /*1   */
+.directionColumn { 
+	flex-direction: column; /* направление главнеой оси в ряд*/
+}
+ /*2   */
+.justifyAround {
+    justify-content: space-around; /* распределение содержимого  по главной оси */ 
+}
+.justifyBetween{
+    justify-content: space-between; /* распределение содержимого  по главной оси */ 
+}
+.justifyCenter  { 
+    justify-content: center; /* распределение содержимого  по главной оси .control>div>div,  */ 
+}
+.justifyEnd{
+    justify-content: end; /* распределение содержимого  по главной оси .control>div>div>div */ 
+}
+ /*3 */
+.alignCenter{
+    align-items:center  ; /* выравнивание в поперечной оси */  
+}
+.alignStart{
+    align-items:start  ; /* выравнивание в поперечной оси */  
+}
+.alignEnd{
+    align-items:end  ; /* выравнивание в поперечной оси */  
+}
+.alignStretch{
+    align-items:stretch  ; /* выравнивание в поперечной оси */  
+}
+ /*4 */
+.grow{
+    flex-grow: 1;  
+}
+
+.basis{
+    flex-basis: 30em; 
+}
+.textAlignCenter{
+	text-align: center;
+}
+.wrap{
+	flex-wrap: wrap;
+}	
+
+/* ----------------   flax  -------------- */
+
+/*10 animation*/
+.buttons{
+    border-style: outset;
+    user-select: none;
+    border-radius: 10px; 
+	padding: 5px 10px;
+	margin:5px;
+	justify-content: center;
+}
+
+.buttons:hover {
+    box-shadow: 0px 0px 5px 5px rgba(75, 75, 75, 0.2);
+}
+
+.buttons:active {
+    border-style:inset;
+    box-shadow: 0px 0px 5px 5px rgba(75, 75, 75, 0.2) inset;
+}
+
+.name_feld{
+	padding: 5px 10px;
+	margin:5px;
+	width: 7em;
+	justify-content: flex-end;
+}
+.feld{
+	padding: 5px 10px;
+	margin:5px;
+	width: 9em;
+	justify-content: flex-start;
+    background-color:rgba(255, 255, 255, 0);
+    border-color:rgba(0, 0, 0, 0.2);
+	border-radius: 5px; 
+}
+textarea.feld{
+    width: 28em;
+}
+.feld:hover{
+
+    box-shadow: 0px 0px 5px 5px rgba(75, 75, 75, 0.2);
+    border-color:rgba(0, 0, 0, 0.5);
+}
+.feld:focus{
+    opacity:1;
+    background-color:rgba(255, 255, 255, 1);
+    border-color:rgba(0, 0, 0, 0.7);
+}
+
+input[readonly], textarea[readonly], select[readonly]{
+    border-color:rgba(0, 0, 0, 0);
+}
+
+div[data-on="0"]{
+	display:none;
+}
+
+div[data-active="1"], a[data-active="1"]{
+    border-style:inset;
+    box-shadow: 0px 0px 5px 5px rgba(75, 75, 75, 0.2) inset;
+}
+
+div[data-write], input[data-read], textarea[data-read], span[data-span]{
+	margin: 2px 5px;
+	padding: 2px 5px;
+}
+
+
+body{
+	--background:url(fon.jpg);
+    background-image: var(--background);     
+	background-repeat: repeat;	
+}

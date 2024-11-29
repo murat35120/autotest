@@ -1,0 +1,112 @@
+let links={ //связываем действия пользователя с функциями, нестандартные варианты
+    call_func (link){
+		let name;
+		name=link.parentNode.dataset.list_id;
+		let name_p=link.parentNode.parentNode.dataset.id;
+        if(typeof name_p !== "undefined"){ //функции по клику
+			if(control[name_p]){
+			    control[name_p](name);
+			}
+        }
+		name=link.dataset.read;
+        if(typeof name !== "undefined"){ //функции по клику
+			if(control[name]){
+			    control[name](link);
+			}
+        }
+		name=link.dataset.a;
+        if(typeof name !== "undefined"){ //функции по клику
+			 control.click_a(link);
+        }
+    },
+    
+};
+
+let control={
+  goIn(){
+	  blocks.id.mainArea.innerHTML='';
+	  make_bock.verifyList(blocks.id.mainArea);
+  },
+};
+
+let functions={
+  
+};
+
+let receivers={
+ 
+    
+};
+
+let make_bock={
+	headerSlogan(parentBlk){
+		if(!parentBlk){
+			parentBlk = document.createElement('div');
+		}
+		maker.one.prepare([['header', 'header', 'MQTT API'], ['slogan', 'slogan', 'Сервис дистанционного открытия замка']], parentBlk);
+		return parentBlk;
+	},
+	loginPass(parentBlk){
+		if(!parentBlk){
+			parentBlk = document.createElement('div');
+		}
+		maker.one.prepare([['loginPass', 'directionColumn'], ['buttons', 'directionColumn alignStretch']], parentBlk);
+		maker.addBlocks.prepare([maker.name_id_type.prepare(['Пароль', 'password']), maker.name_id_type.prepare(['Новый пароль', 'new_password'])], blocks.id.loginPass);
+		maker.click.prepare([["goIn", "Вход"], ["goSave", "Сохранить"], ["goNew", "Новый"]], blocks.id.buttons);
+		return parentBlk;
+	},
+	verifyList(parentBlk){
+		if(!parentBlk){
+			parentBlk = document.createElement('div');
+		}
+		let groupList=[
+    		    ["Ягуар", 'jag'],
+    		    ["ОТК", 'otk'],
+    		    ["Ресурсы", 'res'],
+		    ];
+		let buildList=[
+    		    ["Иркутская", 'irk'],
+    		    ["Литовская", 'lit'],
+    		    ["Бобруйская", 'bobr'],
+		    ];	
+		maker.selectBlocks.prepare([['groupBlock', groupList, 'big1'], ['buildBlock', buildList, 'big2']], parentBlk);
+		make_bock.two_buttons(parentBlk, "204", 204);
+		make_bock.two_buttons(parentBlk, "206", 206);
+		return parentBlk;
+	},
+	two_buttons(parentBlk, door_name, door_id){
+		if(!parentBlk){
+			parentBlk = document.createElement('div');
+		}
+		maker.one.prepare([[door_id, 'feld', door_name], ['buttons'+door_id, 'forTwo']], parentBlk);
+		maker.click.prepare([["goIn"+door_id, "Вход"], ["goOut"+door_id, "Выход"]], blocks.id['buttons'+door_id]);
+
+		
+		return parentBlk;
+	},
+
+}
+
+function carcass(){
+	let screen=maker.ligth.make('', document.body,'screen','screen directionColumn alignCenter');
+	maker.one.prepare([['blockHeader', 'directionColumn'], ['baner', 'directionColumn'], ['mainArea', 'directionColumn alignCenter']], screen);
+	make_bock.headerSlogan(blocks.id.blockHeader);
+	// arr - название кнопки, id блока, функция при нажатии на кнопку, класс стиля блока
+	make_bock.loginPass(blocks.id.mainArea);
+	//make_bock.verifyList(blocks.id.editIn);
+
+	maker.parentsgroup();
+}
+
+function start(){
+    st=1; //признак готовности
+	carcass();
+	document.title='MQTT API';
+
+}
+let st=0;
+if(typeof carcass_start !== "undefined"){
+   if(!st){ 
+        start();
+   }
+}
