@@ -60,12 +60,21 @@ module.exports.create_base=function (mysql){
 		else console.log("Таблица tests создана");
 	});
 
+	//  какая инфОРМАЦИЯ ХРАНИТСЯ В obj json?
+	//- шаблон проверки изменений
+	//- состояние
+	// - изменения
+	// - новое состояние
 	sql = `create table if not exists steps( 
 		s_id int(16) PRIMARY KEY AUTO_INCREMENT,
 		test_id int(16),
 		number_s int(16),
-		obj JSON,
-		result_s int(16), 
+		obj_s JSON,
+		signal_s TEXT,
+		duration_s int(16),
+		pulse_s TINYINT(1),
+		pause_s int(16),
+		result_s int(16),
 		state_text TEXT,
 		state_do TINYINT(1)
 	)`;

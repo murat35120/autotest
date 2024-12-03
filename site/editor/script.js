@@ -609,6 +609,7 @@ let receivers={
 				abonent.std_id=obj.std_id;
 				blocks.read.makenumber.innerText=obj.std_id;
 				abonent.pins=[];
+				maker.writeList(abonent.pins, blocks.id.makeList, '', '', ["signalName", "numberSource", "pinSource" ]);
 			}else{
 
 			}
@@ -864,6 +865,58 @@ let make_bock={
 		maker.name_idText(['Номер',[my_name+nex_name+'number']], blocks.id[my_name+'Adapter']);
 		
 	},
+	edit(parentBlk){
+		let my_name='edit';
+		maker.one.prepare([[my_name+'Header','directionColumn'], [my_name+'Main', 'justifyCenter wrap']], parentBlk);
+		maker.one.prepare([[my_name+'List','directionColumn'], [my_name+'Felds','directionColumn'], [my_name+'Buttons','directionColumn']], blocks.id[my_name+'Main']);
+		maker.name_idText(['Номер',[my_name+'number', 1]], blocks.id[my_name+'Header'], 'for_button');
+		maker.name_idArea(['Описание',[my_name+'Description', "Описание стенда"]], blocks.id[my_name+'Header']);
+		//maker.one.prepare([maker.clickItem.prepare([[my_name+'New', "Новый стенд"]])], blocks.id[my_name+'Header']);
+		maker.clickItem.prepare([[my_name+'New', "Новый стенд"]], blocks.block.for_button);
+		maker.name_idList(['Проверяем',['device', abonent.deviceList]], blocks.id[my_name+'Header']);
+
+		//maker.name_idText(['Соединение',['position', "0"]], blocks.id[my_name+'Felds']);
+		maker.name_idArea(['Сигнал',['signalName', "Тестовое воздействие"]], blocks.id[my_name+'Felds']);
+		maker.name_idList(['Источник', ['source', abonent.sourceList]],blocks.id[my_name+'Felds']);
+		maker.name_idList(['Зав. номер', ['numberSource', abonent.sourceNum]],blocks.id[my_name+'Felds']);
+		maker.name_idList(['Контакт', ['pinSource', abonent.pinz5net]],blocks.id[my_name+'Felds']);
+		let list=[
+			["Да",1],
+			["Нет",0]
+		];
+		maker.name_idList(['Инверсия', ['inversion', list]],blocks.id[my_name+'Felds']);
+
+		//maker.name_idList(['Проверяем',['device', abonent.deviceList]], blocks.id[my_name+'Felds']);
+		
+		maker.name_idList(['Подключаем к', ['pinDevice', abonent.devicePin]],blocks.id[my_name+'Felds'])
+		maker.clickItem.prepare([[my_name+'Add', "Создать"], [my_name+'Save', "Изменить"], [my_name+'Dell', "Удалить"]], blocks.id[my_name+'Buttons']);		
+	},
+	doing(parentBlk){
+		let my_name='doing';
+		maker.one.prepare([[my_name+'Header','directionColumn'], [my_name+'Main', 'justifyCenter wrap']], parentBlk);
+		maker.one.prepare([[my_name+'List','directionColumn'], [my_name+'Felds','directionColumn'], [my_name+'Buttons','directionColumn']], blocks.id[my_name+'Main']);
+		maker.name_idText(['Номер',[my_name+'number', 1]], blocks.id[my_name+'Header'], 'for_button');
+		maker.name_idArea(['Описание',[my_name+'Description', "Описание стенда"]], blocks.id[my_name+'Header']);
+		//maker.one.prepare([maker.clickItem.prepare([[my_name+'New', "Новый стенд"]])], blocks.id[my_name+'Header']);
+		maker.clickItem.prepare([[my_name+'New', "Новый стенд"]], blocks.block.for_button);
+		maker.name_idList(['Проверяем',['device', abonent.deviceList]], blocks.id[my_name+'Header']);
+
+		//maker.name_idText(['Соединение',['position', "0"]], blocks.id[my_name+'Felds']);
+		maker.name_idArea(['Сигнал',['signalName', "Тестовое воздействие"]], blocks.id[my_name+'Felds']);
+		maker.name_idList(['Источник', ['source', abonent.sourceList]],blocks.id[my_name+'Felds']);
+		maker.name_idList(['Зав. номер', ['numberSource', abonent.sourceNum]],blocks.id[my_name+'Felds']);
+		maker.name_idList(['Контакт', ['pinSource', abonent.pinz5net]],blocks.id[my_name+'Felds']);
+		let list=[
+			["Да",1],
+			["Нет",0]
+		];
+		maker.name_idList(['Инверсия', ['inversion', list]],blocks.id[my_name+'Felds']);
+
+		//maker.name_idList(['Проверяем',['device', abonent.deviceList]], blocks.id[my_name+'Felds']);
+		
+		maker.name_idList(['Подключаем к', ['pinDevice', abonent.devicePin]],blocks.id[my_name+'Felds'])
+		maker.clickItem.prepare([[my_name+'Add', "Создать"], [my_name+'Save', "Изменить"], [my_name+'Dell', "Удалить"]], blocks.id[my_name+'Buttons']);		
+	},
 }
 
 function carcass(){
@@ -894,7 +947,8 @@ function carcass(){
 	make_bock.chooseList(blocks.id.chooseIn);
 	make_bock.makeStand(blocks.id.makeIn);
 	make_bock.devices(blocks.id.devicesIn);
-
+	make_bock.edit(blocks.id.editIn);
+	make_bock.doing(blocks.id.doIn);
 }
 
 function start(){
