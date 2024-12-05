@@ -32,6 +32,8 @@ const ip_adresses = os.networkInterfaces();
 for(const i in ip_adresses){
 	for(const k in ip_adresses[i])if(ip_adresses[i][k].family == 'IPv4')console.log("Server running at http://" + ip_adresses[i][k].address + ':' + port_http);
 }
+log("start \r");
+log(String(new Date())+ "\r");
 
 const server = http.createServer((req, res) => {
     let first_url=req.url;
@@ -66,13 +68,27 @@ const connection = mysql.createConnection({
 	  database: "autotest",
 	  password: "3512086"
 });
- //тестирование подключения
+let reconect_start=0;
+function reConnect(){
+    if(!reconect_start){
+        reconect_start=1;
+        connection.connect(function(err){
+        	if (err) {
+        		return console.error("Ошибка: " + err.message);
+        	} else {
+        	    log("Повторное подключение к серверу MySQL parts успешно установлено");
+        		sql_list.start(connection, reConnect, log);
+        	}
+        });
+        setTimeout(()=>{reconect_start=0;},3000);
+	}
+}
 connection.connect(function(err){
 	if (err) {
 		return console.error("Ошибка: " + err.message);
 	} else {
 		console.log("Подключение к серверу MySQL успешно установлено");
-		sql_list.start(connection);
+		sql_list.start(connection, reConnect, log);
 	}
 });
 
@@ -305,6 +321,10 @@ function form_parser(body, name_file){
 	return out_obj;
 }
 
+function log(txt){
+	fs.appendFileSync("log.txt", txt);
+}
+
 //преобразование даты
 Date.prototype.format = function(format = 'yyyy-mm-dd hh:MM:ss') {
     const replaces = {
@@ -323,4 +343,6 @@ Date.prototype.format = function(format = 'yyyy-mm-dd hh:MM:ss') {
 	// вызов (new Date()).format()
 	
 };
-fs.appendFileSync("log.txt", "Hello word\n");
+
+
+

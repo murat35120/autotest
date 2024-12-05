@@ -1,6 +1,8 @@
 let conn;
-module.exports.start=function (connection){
+module.exports.start=function (connection, reConnect, log){
 	conn=connection;
+	reconn=reConnect;
+	log=log;
 }
 module.exports.run=function (query, data){
 	try {
@@ -149,7 +151,7 @@ let list={
 	read(sql, filter, data){
 		conn.query(sql, filter, function(err, results) {
 			let temp;
-			if(err) console.log(err);
+			if(err) reconn();
 			if(results){
 				if("undefined" === typeof results[0]){
 					temp=0;
@@ -169,7 +171,7 @@ let list={
 	insert(sql, filter, data){
 		conn.query(sql, filter, function(err, results) {
 			let temp;
-			if(err) console.log(err);
+			if(err) reconn();
 			if(results){
 				//console.log(results);
 				temp=results.insertId;
@@ -182,7 +184,7 @@ let list={
 	insert_extra(sql, filter, data){
 		conn.query(sql, filter, function(err, results) {
 			let temp;
-			if(err) console.log(err);
+			if(err) reconn();
 			if(results){
 				//console.log(results);
 				temp=results.affectedRows;
@@ -195,7 +197,7 @@ let list={
 	insert_arr(sql, arr, data){
 		conn.query(sql, [arr], function(err, results) {
 			let temp;
-			if(err) console.log(err);
+			if(err) reconn();
 			if(results){
 				//console.log(results);
 				temp=results.affectedRows;
@@ -208,7 +210,7 @@ let list={
 	edit(sql, filter, data){
 		conn.query(sql, filter, function(err, results) {
 			let temp;
-			if(err) console.log(err);
+			if(err) reconn();
 			if(results){
 				temp=1;//results.changedRows;
 				//console.log(results.changedRows);
@@ -223,7 +225,7 @@ let list={
 		//console.log('d2');
 		let sql = `drop database autotest`;
 		conn.query(sql, function(err, results) {
-			if(err) console.log(err);
+			if(err) reconn();
 			else console.log("База autotest данных удалена");
 			data.funk.next("base deleted");
 		})

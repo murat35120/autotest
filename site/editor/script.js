@@ -867,29 +867,22 @@ let make_bock={
 	},
 	edit(parentBlk){
 		let my_name='edit';
-		maker.one.prepare([[my_name+'Header','directionColumn'], [my_name+'Main', 'justifyCenter wrap']], parentBlk);
-		maker.one.prepare([[my_name+'List','directionColumn'], [my_name+'Felds','directionColumn'], [my_name+'Buttons','directionColumn']], blocks.id[my_name+'Main']);
-		maker.name_idText(['Номер',[my_name+'number', 1]], blocks.id[my_name+'Header'], 'for_button');
-		maker.name_idArea(['Описание',[my_name+'Description', "Описание стенда"]], blocks.id[my_name+'Header']);
-		//maker.one.prepare([maker.clickItem.prepare([[my_name+'New', "Новый стенд"]])], blocks.id[my_name+'Header']);
-		maker.clickItem.prepare([[my_name+'New', "Новый стенд"]], blocks.block.for_button);
-		maker.name_idList(['Проверяем',['device', abonent.deviceList]], blocks.id[my_name+'Header']);
-
-		//maker.name_idText(['Соединение',['position', "0"]], blocks.id[my_name+'Felds']);
-		maker.name_idArea(['Сигнал',['signalName', "Тестовое воздействие"]], blocks.id[my_name+'Felds']);
-		maker.name_idList(['Источник', ['source', abonent.sourceList]],blocks.id[my_name+'Felds']);
-		maker.name_idList(['Зав. номер', ['numberSource', abonent.sourceNum]],blocks.id[my_name+'Felds']);
-		maker.name_idList(['Контакт', ['pinSource', abonent.pinz5net]],blocks.id[my_name+'Felds']);
-		let list=[
-			["Да",1],
-			["Нет",0]
-		];
-		maker.name_idList(['Инверсия', ['inversion', list]],blocks.id[my_name+'Felds']);
-
-		//maker.name_idList(['Проверяем',['device', abonent.deviceList]], blocks.id[my_name+'Felds']);
+		maker.one.prepare([[my_name+'Top','wrap'], [my_name+'Midl','justifyCenter wrap']], parentBlk);
+		maker.one.prepare([[my_name+'Pins','directionColumn wrap'], [my_name+'Main','directionColumn justifyCenter wrap'], [my_name+'Slave', 'justifyCenter wrap']], blocks.id[my_name+'Midl']);
+		maker.name_idText(['Состояние',[my_name+'Condition']], blocks.id[my_name+'Main']);
+		maker.name_idArea(['Описание',[my_name+'Description', "Описание проверки"]], blocks.id[my_name+'Main']);
+		maker.name_idArea(['Результат',[my_name+'Result', "Ожидаемый результат"]], blocks.id[my_name+'Main']);
+		maker.name_idText(['Шаги',[my_name+'Steps']], blocks.id[my_name+'Main']);
+		maker.textBlocks.prepare([[my_name+1, 1],[my_name+2, 2],[my_name+3, 3]], blocks.id[my_name+'Pins']);
+		maker.textBlocks.prepare([[my_name+"Number", 345],[my_name+"Name", "Первая проверка"]], blocks.id[my_name+'Top']);
+		maker.click.prepare([["info", "..."]], blocks.id[my_name+'Top']);
+		maker.one.prepare([[my_name+'Step','directionColumn  wrap'], [my_name+'Buttons','directionColumn  justifyCenter wrap']], blocks.id[my_name+'Slave']);
+		maker.click.prepare([[my_name+"Run", "Выполнить"], [my_name+"Change", "Изменить"], [my_name+"Insert", "Вставить"],[my_name+"Delete", "Удалить"]], blocks.id[my_name+'Buttons']);
+		maker.name_idText(['Шаг',[my_name+'Step_num', 4 ]], blocks.id[my_name+'Step']);
+		maker.name_idList(['Действие',[my_name+'Step_do', '','']], blocks.id[my_name+'Step']);
+		maker.name_idList(['Анализатор',[my_name+'Step_analise', '','']], blocks.id[my_name+'Step']);
+		maker.name_idType(['Пауза',[my_name+'Step_pause', "Number", 4 ]], blocks.id[my_name+'Step']);
 		
-		maker.name_idList(['Подключаем к', ['pinDevice', abonent.devicePin]],blocks.id[my_name+'Felds'])
-		maker.clickItem.prepare([[my_name+'Add', "Создать"], [my_name+'Save', "Изменить"], [my_name+'Dell', "Удалить"]], blocks.id[my_name+'Buttons']);		
 	},
 	doing(parentBlk){
 		let my_name='doing';
@@ -932,7 +925,7 @@ function carcass(){
 	maker.buttonsBlocks(arr_arss, 'main', 'justifyCenter', blocks.id.mainArea);
 	arr_arss=[
 		['Выбрать', 'chooseIn', 'goChoose','wrap justifyCenter'],
-		['Редактировать', 'editIn', 'goEdit'],
+		['Редактировать', 'editIn', 'goEdit','wrap justifyCenter directionColumn'],
 		['Выполнить', 'doIn', 'goDo'],
 	];
 	maker.buttonsBlocks(arr_arss, 'check', 'justifyCenter', blocks.id.checkIn);

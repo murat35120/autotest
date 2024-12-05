@@ -37,6 +37,7 @@ module.exports.create_base=function (mysql){
 		c_id int(16) PRIMARY KEY AUTO_INCREMENT,
 		date_do datetime default(CURRENT_TIMESTAMP),
 		abonent_id int(16),
+		name_c TEXT,
 		status varchar(15),
 		result_c TINYINT(1),
 		stand_id int(16)
@@ -53,7 +54,7 @@ module.exports.create_base=function (mysql){
 		number_t int(16),
 		result_t TINYINT(1), 
 		do_text TEXT,
-		tesult_text TEXT
+		result_text TEXT
 	)`;
 	connection.query(sql, function(err, results) {
 		if(err) console.log(err);
